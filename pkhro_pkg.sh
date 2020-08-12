@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T09:21:30-04:00
+# @Last modified time: 2020-08-12T09:22:57-04:00
 # -----------------------------------------------------------------------------
 
 exec 2>> /var/log/parakhronos.log
