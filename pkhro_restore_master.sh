@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: vds2cp_restore_master.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T06:10:11-04:00
+# @Last modified time: 2020-08-12T10:02:16-04:00
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
@@ -16,22 +16,26 @@
 
 IFS=$'\n'
 cpusrs=( "$@" )
+prsswoad=$(/bin/date +%N%s | base64 |cut -c -12)
+drowssap=`echo $prsswoad`
+
+if [ -f /root/pkhro_restore.sh ]
+rm -f /root/pkhro_restore.sh
+fi
 
 if [ ! -f /root/pkhro_restore.sh ]
-then
-wget --no-check-certificate https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_restore.sh; chmod 755 pkhro_restore.sh
+  then
+    wget --no-check-certificate https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_restore.sh; chmod 755 pkhro_restore.sh
 fi
 
 for i in "${cpusrs[@]}"
 do
   cpname=$(echo $i | cut -c -8)
-  prsswoad=$(/bin/date +%N%s | base64 |cut -c -12)
-  echo $i $cpname "$prsswoad" >> /var/log/mig_user_pass
+  echo $cpname "$drowssap" >> /var/log/mig_user_pass
   echo -e "\e[33m\e[1m Restoring account $i \e[0m";sleep 1; echo
   eval cd /root/
-  eval ./pkhro_restore.sh $i $cpname "$prsswoad"
-  sleep 20;
-  echo;
+  eval ./pkhro_restore.sh $i $cpname "$drowssap"
+  sleep 10;
   echo;
 done
 

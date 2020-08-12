@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: pkhron_restore.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T09:40:11-04:00
+# @Last modified time: 2020-08-12T10:02:00-04:00
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
@@ -17,7 +17,7 @@ vdsUSER=$1
 cpUSER=$2
 pWORD=$3
 WORKDIR=/root/"$vdsUSER"_restore
-PWSTRNG=$(whmapi1 get_password_strength password=$3 |grep "strength:"| awk '{gsub(" strength: ", "");print}')
+PWSTRNG=$(whmapi1 get_password_strength password="$3" |grep "strength:"| awk '{gsub(" strength: ", "");print}')
 mkdir -p /var/log/parakhronos_logs
 exec > >(tee -i /var/log/parakhronos_logs/"$cpUSER"_parakhronos.log)
 exec 2>&1
@@ -67,7 +67,7 @@ echo -e "\e[33m\e[1m Checking for Date::Parse. Installation can take some time. 
 if (perldoc -l Date::Parse | grep -q "Date/Parse.pm")
  then
    echo
-   echo -e "\e[1m\e[32m Date::Parse is installed! \e[0m" ;
+   echo -e "\e[1m\e[32m Date::Parse is already installed! \e[0m" ;
 else
   cpan -i Date::Parse
 fi
