@@ -1,46 +1,4 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![GNU License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
-
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-
-  <h3 align="center">Parakhronos</h3>
-
-  <p align="center">
-    VDS to cPanel Migration Script
-    <br />
-    <a href="https://github.com/stephenchaffins/Parakhronos"><strong>Explore the docs »</strong></a>
-    <br />
-    <a href="https://github.com/stephenchaffins/Parakhronos/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/stephenchaffins/Parakhronos/issues">Request Feature</a>
-  </p>
-</p>
-
-
-
-<!-- TABLE OF CONTENTS -->
-## Table of Contents
-
-* [Packaging Script](#packaging-script)
-* [Usage](#usage)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [License](#license)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
-
-
-
-<!-- ABOUT THE PROJECT -->
-## About The Project
+# Parakhronos
 
 Parakhronos is a migration application written to automate migrations between the legacy product "Sphera VDS Control Panel" to the new and ever updated cPanel control panel.
 
@@ -118,19 +76,3 @@ Logs for everything the script has done is at /var/log/parakhronos/CPANELUSERNAM
         ./pkhro_restore_master.sh USER1 USER2 USER3 USERETC
 
 4. This should restore all of the accounts you specified, and SHOULD output a list of passwords created, that correspond with each account. This list isnt saved anywhere, so you need to save it then delete after you update your records/billing client.
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
-[contributors-url]: https://github.com/stephenchaffins/Parakhronos/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
-[forks-url]: https://github.com/stephenchaffins/Parakhronos/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
-[stars-url]: https://github.com/stephenchaffins/Parakhronos/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
-[issues-url]: https://github.com/stephenchaffins/Parakhronos/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
-[license-url]: https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/LICENSE
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/stephen-chaffins-39412760/
