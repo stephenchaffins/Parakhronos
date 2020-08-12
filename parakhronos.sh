@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T14:51:20-04:00
+# @Last modified time: 2020-08-12T15:02:44-04:00
 # -----------------------------------------------------------------------------
 
 
@@ -89,10 +89,13 @@ elif [[ -f /usr/local/cpanel/cpanel ]]; then
   echo -e "\e[33m\e[1m IF YOU DONT SAVE THESE NOW, YOU WILL HAVE TO REGENERATE FOR ALL CUSTOMERS MIGRATED \e[0m";
   echo -e "\e[33m\e[1m These corresponding password is used with anything that has a password in cPanel. \e[0m";sleep 1; echo
   cat /var/log/mig_user_pass
+  echo
   rm -f /var/log/mig_user_pass
   rm -rf /root/migration_scripts
 else
   echo "WHAT IS THIS SERVER?!"
 fi
+
+rm -rf /root/migration_scripts
 
 exit 0
