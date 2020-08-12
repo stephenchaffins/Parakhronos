@@ -7,10 +7,8 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T15:04:53-04:00
+# @Last modified time: 2020-08-12T16:42:50-04:00
 # -----------------------------------------------------------------------------
-
-exec 2>> /var/log/parakhronos.log
 
 # -----------------------------------------------------------------------------
 # Using this line to set some basic vairables.
