@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T08:02:10-04:00
+# @Last modified time: 2020-08-12T08:10:31-04:00
 # -----------------------------------------------------------------------------
 
 exec 2>> /var/log/parakhronos.log
@@ -116,8 +116,8 @@ do
   d=`echo "$line" | awk '{print $1}'`
   s=`echo "$line" | awk '{print $2}'`
   mkdir -p /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
-  #cp -R "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
-  rsync -vaP "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
+  cp -R "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
+  #rsync -vaP "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
 done < "$WDIR"/text_files/"$VDSUSER"_addon_subdomains;
 
 kill "$bgid";
