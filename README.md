@@ -30,7 +30,9 @@
 
 ***
 
-Parakhronos is a migration application written to automate migrations between the legacy product "Sphera VDS Control Panel" to the new and ever updated cPanel control panel.
+## About Parakhronos
+
+:information_source: Parakhronos is a migration application written to automate migrations between the legacy product "Sphera VDS Control Panel" to the new and ever updated cPanel control panel.
 
 Parakhronos is:
 - Written entirely in bash
