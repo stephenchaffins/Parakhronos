@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T08:22:07-04:00
+# @Last modified time: 2020-08-12T08:30:44-04:00
 # -----------------------------------------------------------------------------
 
 exec 2>> /var/log/parakhronos.log
@@ -119,12 +119,11 @@ do
   s=`echo "$line" | awk '{print $2}'`
   mkdir -p /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
   #cp -R "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
-#  if [ "$TMPemptychk" -ge 1 ]; then
-#    rsync -vaP "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
-#  else
-#    echo "nothing to rsync"
-#  fi
-rsync -vaP "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
+  if [ "$TMPemptychk" -ge 1 ]; then
+    rsync -vaP "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
+  else
+    echo "nothing to rsync"
+  fi
 done < "$WDIR"/text_files/"$VDSUSER"_addon_subdomains;
 
 kill "$bgid";
@@ -140,13 +139,19 @@ while :; do
 done &
 bgid=$!
 ##end ticking
+TMPemptychk2=`cat "$WDIR"/text_files/"$VDSUSER"_subdomain_list`
 
 while read sdcopy
 do
   dcop=`echo "$sdcopy" | awk '{print $1}'`
   scop=`echo "$sdcopy" | awk '{print $2}'`
   mkdir -p /root/"$TODAY"_"$VDSUSER"/domain_files/$dcop/
-  cp -R "$scop"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$dcop/
+  if [ "$TMPemptychk2" -ge 1 ]; then
+    rsync -vaP "$scop"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$dcop/
+  else
+    echo "nothing to rsync"
+  fi
+  #cp -R "$scop"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$dcop/
 done < "$WDIR"/text_files/"$VDSUSER"_subdomain_list;
 
 kill "$bgid"; echo
@@ -157,7 +162,7 @@ kill "$bgid"; echo
 echo -e "\e[33m\e[1m Copying main domain... \e[0m"
 grep -E 'ServerName|DocumentRoot' /etc/httpd/conf/httpd.conf | grep -vE ':80|/var/www/html' |sed -e 's/.*Name\ //g' |sed -e 's/.*DocumentRoot\ //g'| xargs -n2 |awk '{print $2}' |awk -F "/" '{print $NF}' |grep -v '^html$' > "$WDIR"/text_files/tmp_excludes
 mkdir -p /root/"$TODAY"_"$VDSUSER"/domain_files/$MDOM
-ls /var/www/html/|grep -v '^plugins$' ||grep -v '^fm$' |grep -v '^users$' |grep -v '^manager$' |grep -v '^vdsbackup$'  |grep -vf "$WDIR"/text_files/tmp_excludes > "$WDIR"/text_files/mdom_exlist
+ls /var/www/html/|grep -v '^plugins$' |grep -v '^fm$' |grep -v '^users$' |grep -v '^manager$' |grep -v '^vdsbackup$'  |grep -vf "$WDIR"/text_files/tmp_excludes > "$WDIR"/text_files/mdom_exlist
 
 ##ticking
 while :; do
