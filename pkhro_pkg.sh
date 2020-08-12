@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T08:15:24-04:00
+# @Last modified time: 2020-08-12T08:22:07-04:00
 # -----------------------------------------------------------------------------
 
 exec 2>> /var/log/parakhronos.log
@@ -95,7 +95,7 @@ cat "$WDIR"/text_files/"$VDSUSER"_all_domains |grep -Ev "$MDOM|$excadon" | sed '
 # Gathering addon domains whos paths are not specifically /var/www/html.
 # -----------------------------------------------------------------------------
 echo -e "\e[33m\e[1m Cleaning up domain lists... \e[0m"
-cat "$WDIR"/text_files/"$VDSUSER"_addonsub_list |awk '$2 != "/var/www/html"' | 's/www\.//' > "$WDIR"/text_files/"$VDSUSER"_addon_subdomains;
+cat "$WDIR"/text_files/"$VDSUSER"_addonsub_list |awk '$2 != "/var/www/html"' |sed 's/www\.//' > "$WDIR"/text_files/"$VDSUSER"_addon_subdomains;
 echo
 
 # -----------------------------------------------------------------------------
@@ -111,7 +111,7 @@ done &
 bgid=$!
 ##end ticking
 
-TMPemptychk=(cat "$WDIR"/text_files/"$VDSUSER"_addon_subdomains)
+TMPemptychk=`cat "$WDIR"/text_files/"$VDSUSER"_addon_subdomains`
 
 while read line
 do
@@ -119,11 +119,12 @@ do
   s=`echo "$line" | awk '{print $2}'`
   mkdir -p /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
   #cp -R "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
-  if [ "$TMPemptychk" -ge 1 ]; then
-    rsync -vaP "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
-  else
-    echo "nothing to rsync"
-  fi
+#  if [ "$TMPemptychk" -ge 1 ]; then
+#    rsync -vaP "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
+#  else
+#    echo "nothing to rsync"
+#  fi
+rsync -vaP "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
 done < "$WDIR"/text_files/"$VDSUSER"_addon_subdomains;
 
 kill "$bgid";
