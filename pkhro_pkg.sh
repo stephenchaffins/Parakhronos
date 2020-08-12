@@ -1,4 +1,4 @@
-#!/bin/bash
+kill "$bgid" > /dev/null;#!/bin/bash
 
 # -----------------------------------------------------------------------------
 # @Author: Stephen Chaffins
@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T16:57:06-04:00
+# @Last modified time: 2020-08-12T17:03:21-04:00
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
@@ -60,7 +60,7 @@ bgid=$!
 
 cp -a /var/spool/mail "$WDIR"/mailboxes
 
-kill "$bgid" &> /dev/null; echo
+kill "$bgid" >  /dev/null; echo
 # -----------------------------------------------------------------------------
 # Get the main domain
 # -----------------------------------------------------------------------------
@@ -131,8 +131,7 @@ do
   fi
 done < "$WDIR"/text_files/"$VDSUSER"_addon_subdomains;
 
-kill "$bgid" &> /dev/null;
-
+kill "$bgid" > /dev/null;
 # -----------------------------------------------------------------------------
 # Copying subdomains data
 # -----------------------------------------------------------------------------
@@ -159,7 +158,7 @@ do
   #cp -R "$scop"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$dcop/
 done < "$WDIR"/text_files/"$VDSUSER"_subdomain_list;
 
-kill "$bgid" &> /dev/null; echo
+kill "$bgid" >  /dev/null; echo
 
 # -----------------------------------------------------------------------------
 # Copying the main domain data. This is messy and ugly, but there's no rsync.
@@ -185,7 +184,7 @@ done < "$WDIR"/text_files/mdom_exlist
 #rm "$WDIR"/text_files/mdom_exlist
 #rm "$WDIR"/text_files/tmp_excludes
 
-kill "$bgid" &> /dev/null; echo
+kill "$bgid" >  /dev/null; echo
 
 # -----------------------------------------------------------------------------
 # Find all existing MySQL databases. MySQL must be running.
@@ -209,7 +208,7 @@ else
 fi
 echo
 
-kill "$bgid" &> /dev/null; echo
+kill "$bgid" >  /dev/null; echo
 
 # -----------------------------------------------------------------------------
 # This tars and gzips all thats been gathered (data and text files, and dumps.)
@@ -223,8 +222,7 @@ bgid=$!
 
 tar -C "$WDIR" -cf /root/parakhronos_restore_"$VDSUSER".tar . |grep -v "Removing leading"
 
-kill "$bgid" &> /dev/null;
-echo
+kill "$bgid" > /dev/null;echo
 
 echo -e "\e[33m\e[1m Archiving of all data now complete..."; echo
 
