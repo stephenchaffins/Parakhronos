@@ -1,7 +1,7 @@
 <h1 align="center">Welcome to Parakhronos 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-3.00.15-blue.svg?cacheSeconds=2592000" />
-  <img src="https://img.shields.io/badge/bash-%3E%3D3.00.15-blue.svg" />
+  <img src="https://img.shields.io/badge/bash-%3E%3D1.5-blue.svg" />
   <a href="https://github.com/stephenchaffins/Parakhronos#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
