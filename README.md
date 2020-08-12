@@ -14,14 +14,13 @@ This is very basic. If you are wanting to migrate a single account, you can use 
 
 
 1. Login to the vds, download this file.
-
+```
     wget --no-check-certificate https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_pkg.sh; chmod 755 pkhro_pkg.sh
-
-
+```
 2. To execute it just run:
-
+```
     ./pkhro_pkg.sh
-
+```
 It is very important that I should mention, this is ran INSIDE of the VDS, as the VDS user.
 
 Logs for everything this script has done is at /var/log/parakhronos.log
