@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T14:36:49-04:00
+# @Last modified time: 2020-08-12T14:38:26-04:00
 # -----------------------------------------------------------------------------
 
 
@@ -86,7 +86,7 @@ elif [[ -f /usr/local/cpanel/cpanel ]]; then
   echo -e "\e[33m\e[1m These corresponding password is used with anything that has a password in cPanel. \e[0m";sleep 1; echo
   cat /var/log/mig_user_pass
   rm -f /var/log/mig_user_pass
-  rm -f /root/pkhro_restore.sh
+  rm -rf /root/migration_scripts
 else
   echo "WHAT IS THIS SERVER?!"
 fi
