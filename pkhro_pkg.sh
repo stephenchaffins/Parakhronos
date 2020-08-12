@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T07:15:03-04:00
+# @Last modified time: 2020-08-12T07:50:27-04:00
 # -----------------------------------------------------------------------------
 
 exec 2>> /var/log/parakhronos.log
@@ -75,8 +75,8 @@ echo $MDOM > "$WDIR"/text_files/"$VDSUSER"_main_domain;
 # Get the addon domains, and the subdomains.
 # -----------------------------------------------------------------------------
 echo -e "\e[33m\e[1m Getting Addon and Subdomain lists... \e[0m"; echo
-grep -E 'ServerName|DocumentRoot' /etc/httpd/conf/httpd.conf | grep -vE ':80|"/var/www/html"' |sed -e 's/.*Name\ //g' |sed -e 's/.*DocumentRoot\ //g'| xargs -n2 |awk '$1 !~ (/.*\..*\./)' > "$WDIR"/text_files/"$VDSUSER"_addonsub_list;
-grep -E 'ServerName|DocumentRoot' /etc/httpd/conf/httpd.conf | grep -vE ':80|"/var/www/html"' |sed -e 's/.*Name\ //g' |sed -e 's/.*DocumentRoot\ //g'| xargs -n2 |awk '$1 ~ (/.*\..*\./)' > "$WDIR"/text_files/"$VDSUSER"_subdomain_list;
+grep -E 'ServerName|DocumentRoot' /etc/httpd/conf/httpd.conf | grep -vE ':80|/var/www/html' |sed -e 's/.*Name\ //g' |sed -e 's/.*DocumentRoot\ //g'| xargs -n2 |awk '$1 !~ (/.*\..*\./)'| sed 's/www\.//' > "$WDIR"/text_files/"$VDSUSER"_addonsub_list;
+grep -E 'ServerName|DocumentRoot' /etc/httpd/conf/httpd.conf | grep -vE ':80|/var/www/html' |sed -e 's/.*Name\ //g' |sed -e 's/.*DocumentRoot\ //g'| xargs -n2 |awk '$1 ~ (/.*\..*\./)' > "$WDIR"/text_files/"$VDSUSER"_subdomain_list;
 
 # -----------------------------------------------------------------------------
 # List aliased/parked domains that have the web directory set to /var/www/html
@@ -88,14 +88,14 @@ echo -e "\e[33m\e[1m Getting Parked/Aliased domains list... \e[0m"; echo
 # Singling out the parked domains.
 # -----------------------------------------------------------------------------
 excadon=`cat "$WDIR"/text_files/"$VDSUSER"_addonsub_list | awk -F "\ " '{print $1}'`
-cat /etc/mail/virtusertable |awk '{print $1}'|grep -vE '\#|^$'| sed '/^@/ d'|sed 's/.*@//'| sort -u >  "$WDIR"/text_files/"$VDSUSER"_all_domains
-cat "$WDIR"/text_files/"$VDSUSER"_all_domains |grep -Ev "$MDOM|$excadon" > "$WDIR"/text_files/"$VDSUSER"_parked_domains
+cat /etc/mail/virtusertable |awk '{print $1}'|grep -vE '\#|^$'| sed '/^@/ d'|sed 's/.*@//'| grep -v 'www.'| sort -u >  "$WDIR"/text_files/"$VDSUSER"_all_domains
+cat "$WDIR"/text_files/"$VDSUSER"_all_domains |grep -Ev "$MDOM|$excadon" | sed 's/www\.//' > "$WDIR"/text_files/"$VDSUSER"_parked_domains
 
 # -----------------------------------------------------------------------------
 # Gathering addon domains whos paths are not specifically /var/www/html.
 # -----------------------------------------------------------------------------
 echo -e "\e[33m\e[1m Cleaning up domain lists... \e[0m"
-cat "$WDIR"/text_files/"$VDSUSER"_addonsub_list |awk '$2 != "/var/www/html"' > "$WDIR"/text_files/"$VDSUSER"_addon_subdomains;
+cat "$WDIR"/text_files/"$VDSUSER"_addonsub_list |awk '$2 != "/var/www/html"' | 's/www\.//' > "$WDIR"/text_files/"$VDSUSER"_addon_subdomains;
 echo
 
 # -----------------------------------------------------------------------------
@@ -148,9 +148,9 @@ kill "$bgid"; echo
 # Copying the main domain data. This is messy and ugly, but there's no rsync.
 # -----------------------------------------------------------------------------
 echo -e "\e[33m\e[1m Copying main domain... \e[0m"
-grep -E 'ServerName|DocumentRoot' /etc/httpd/conf/httpd.conf | grep -vE ':80|"/var/www/html"' |sed -e 's/.*Name\ //g' |sed -e 's/.*DocumentRoot\ //g'| xargs -n2 |awk '{print $2}' |awk -F "/" '{print $NF}' |grep -v '^html$' > "$WDIR"/text_files/tmp_excludes
+grep -E 'ServerName|DocumentRoot' /etc/httpd/conf/httpd.conf | grep -vE ':80|/var/www/html' |sed -e 's/.*Name\ //g' |sed -e 's/.*DocumentRoot\ //g'| xargs -n2 |awk '{print $2}' |awk -F "/" '{print $NF}' |grep -v '^html$' > "$WDIR"/text_files/tmp_excludes
 mkdir -p /root/"$TODAY"_"$VDSUSER"/domain_files/$MDOM
-ls /var/www/html/|grep -v '^fm$' |grep -v '^vdsbackup$'  |grep -vf "$WDIR"/text_files/tmp_excludes > "$WDIR"/text_files/mdom_exlist
+ls /var/www/html/|grep -v '^plugins$' ||grep -v '^fm$' |grep -v '^users$' |grep -v '^manager$' |grep -v '^vdsbackup$'  |grep -vf "$WDIR"/text_files/tmp_excludes > "$WDIR"/text_files/mdom_exlist
 
 ##ticking
 while :; do
