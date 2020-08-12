@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T08:33:15-04:00
+# @Last modified time: 2020-08-12T08:40:45-04:00
 # -----------------------------------------------------------------------------
 
 exec 2>> /var/log/parakhronos.log
@@ -160,9 +160,9 @@ kill "$bgid"; echo
 # Copying the main domain data. This is messy and ugly, but there's no rsync.
 # -----------------------------------------------------------------------------
 echo -e "\e[33m\e[1m Copying main domain... \e[0m"
-grep -E 'ServerName|DocumentRoot' /etc/httpd/conf/httpd.conf | grep -vE ':80|/var/www/html' |sed -e 's/.*Name\ //g' |sed -e 's/.*DocumentRoot\ //g'| xargs -n2 |awk '{print $2}' |awk -F "/" '{print $NF}' |grep -v '^html$' > "$WDIR"/text_files/tmp_excludes
+grep -E 'ServerName|DocumentRoot' /etc/httpd/conf/httpd.conf | grep -vE ':80|/var/www/html' |sed -e 's/.*Name\ //g' |sed -e 's/.*DocumentRoot\ //g'| xargs -n2 |awk '{print $2}'|awk -F "/" '{print $NF}' |grep -v '^html$'|grep -v -e '^[[:space:]]*$' > "$WDIR"/text_files/tmp_excludes
 mkdir -p /root/"$TODAY"_"$VDSUSER"/domain_files/$MDOM
-ls /var/www/html/|grep -v '^plugins$' |grep -v '^fm$' |grep -v '^users$' |grep -v '^manager$' |grep -v '^vdsbackup$'  |grep -vf "$WDIR"/text_files/tmp_excludes > "$WDIR"/text_files/mdom_exlist
+ls /var/www/html/|grep -v '^manager.html$' |grep -v '^plugins$' |grep -v '^fm$' |grep -v '^users$' |grep -v '^manager$' |grep -v '^vdsbackup$'  |grep -vf "$WDIR"/text_files/tmp_excludes > "$WDIR"/text_files/mdom_exlist
 
 ##ticking
 while :; do
