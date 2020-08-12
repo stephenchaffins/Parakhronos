@@ -1,7 +1,7 @@
 <h1 align="center">Welcome to Parakhronos :mage: </h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-3.00.15-blue.svg?cacheSeconds=2592000" />
-  <img src="https://img.shields.io/badge/bash-%3E%3D1.5-blue.svg" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.5-blue.svg?cacheSeconds=2592000" />
+  <img src="https://img.shields.io/badge/bash-%3E%3D3.00.15-blue.svg" />
   <a href="https://github.com/stephenchaffins/Parakhronos#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
@@ -17,7 +17,19 @@
 
 ### :house_with_garden: [Homepage](https://github.com/stephenchaffins/Parakhronos)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+<!-- TOC START min:1 max:3 link:true asterisk:true update:true -->
+  * [Prerequisites](#prerequisites)
+  * [Author](#author)
+  * [About Parakhronos](#about-parakhronos)
+  * [VDS Packaging Script](#vds-packaging-script--pkhro_pkgsh--to-be-ran-inside-the-vds-)
+  * [VDS to cPanel Restoration Script](#vds-to-cpanel-restoration-script--pkhro_restoresh--to-be-ran-on-cpanel-)
+  * [VDS Packaging Master Script](#vds-packaging-master-script--pkhro_pkg_mastersh--to-be-ran-on-vds-master-as-root-)
+  * [VDS Restoration Master Script ](#vds-restoration-master-script--pkhro_restore_mastersh--to-be-ran-on-cpanel-server-as-root-)
+  * [:handshake: Contributing](#handshake-contributing)
+  * [Show your support](#show-your-support)
+  * [:pencil:	 License](#pencil-license)
+<!-- TOC END -->
+
 
 
 ## Prerequisites
