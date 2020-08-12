@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T07:58:41-04:00
+# @Last modified time: 2020-08-12T08:00:22-04:00
 # -----------------------------------------------------------------------------
 
 exec 2>> /var/log/parakhronos.log
@@ -76,7 +76,7 @@ echo $MDOM > "$WDIR"/text_files/"$VDSUSER"_main_domain;
 # -----------------------------------------------------------------------------
 echo -e "\e[33m\e[1m Getting Addon and Subdomain lists... \e[0m"; echo
 grep -E 'ServerName|DocumentRoot' /etc/httpd/conf/httpd.conf | grep -vE ':80|/var/www/html' |sed -e 's/.*Name\ //g' |sed -e 's/.*DocumentRoot\ //g'| xargs -n2 |awk '$1 !~ (/.*\..*\./)'| sed 's/www\.//' > "$WDIR"/text_files/"$VDSUSER"_addonsub_list;
-grep -E 'ServerName|DocumentRoot' /etc/httpd/conf/httpd.conf | grep -vE ':80|/var/www/html' |sed -e 's/.*Name\ //g' |sed -e 's/.*DocumentRoot\ //g'| xargs -n2 |awk '$1 ~ (/.*\..*\./)' > "$WDIR"/text_files/"$VDSUSER"_subdomain_list;
+grep -E 'ServerName|DocumentRoot' /etc/httpd/conf/httpd.conf | grep -vE ':80|/var/www/html' |sed -e 's/.*Name\ //g' |sed -e 's/.*DocumentRoot\ //g'| xargs -n2 |awk '$1 ~ (/.*\..*\./)'|sed 's/www\.//' > "$WDIR"/text_files/"$VDSUSER"_subdomain_list;
 
 # -----------------------------------------------------------------------------
 # List aliased/parked domains that have the web directory set to /var/www/html
