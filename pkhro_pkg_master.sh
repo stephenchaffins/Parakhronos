@@ -5,7 +5,7 @@
 # @Project: Parakhronos
 # @Filename: pkhro_pkg_master.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T06:09:34-04:00
+# @Last modified time: 2020-08-12T09:29:13-04:00
 # -----------------------------------------------------------------------------
 
 #!/bin/bash
@@ -53,3 +53,5 @@ do
     su - $i -c 'cd /root/; /bin/bash pkhro_pkg.sh'
     echo -e "\e[33m\e[1m Rsyncing $i to vmcp14... \e[0m";sleep 1; echo
 done
+
+exit 0
