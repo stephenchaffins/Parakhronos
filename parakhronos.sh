@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T14:48:57-04:00
+# @Last modified time: 2020-08-12T14:51:20-04:00
 # -----------------------------------------------------------------------------
 
 
@@ -35,8 +35,10 @@ if [[ -f /root/migration_scripts/pkhro_pkg.sh ]]; then
   rm -f /root/migration_scripts/pkhro_pkg.sh
 elif [[ ! -f /root/migration_scripts/pkhro_pkg.sh ]]; then
   wget -q --no-check-certificate --no-cache --no-cookie https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_pkg.sh -O /root/migration_scripts/pkhro_pkg.sh
+  chmod 755 /root/migration_scripts/pkhro_pkg.sh
 else
   wget -q --no-check-certificate --no-cache --no-cookie https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_pkg.sh -O /root/migration_scripts/pkhro_pkg.sh
+  chmod 755 /root/migration_scripts/pkhro_pkg.sh
 fi
 
 # check for restore script, remove it exists. Download anew.
@@ -44,8 +46,10 @@ if [[ -f /root/migration_scripts/pkhro_restore.sh ]]; then
   rm -f /root/migration_scripts/pkhro_restore.sh
 elif [[ ! -f /root/migration_scripts/pkhro_restore.sh ]]; then
   wget -q --no-check-certificate --no-cache --no-cookie https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_restore.sh -O /root/migration_scripts/pkhro_restore.sh
+  chmod 755 /root/migration_scripts/pkhro_restore.sh
 else
   wget -q --no-check-certificate --no-cache --no-cookie https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_restore.sh -O /root/migration_scripts/pkhro_restore.sh
+  chmod 755 /root/migration_scripts/pkhro_restore.sh
 fi
 
 # -----------------------------------------------------------------------------
