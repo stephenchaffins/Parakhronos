@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Parakhronos 👋</h1>
+<h1 align="center">Welcome to Parakhronos 🏯</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-3.00.15-blue.svg?cacheSeconds=2592000" />
   <img src="https://img.shields.io/badge/bash-%3E%3D1.5-blue.svg" />
@@ -26,7 +26,7 @@
 👤 **Stephen Chaffins**
 
 * GitHub: [@stephenchaffins](https://github.com/stephenchaffins)
-* LinkedIn: [@stephenchaffins@gmail.com](https://linkedin.com/in/stephen-chaffins-39412760)
+* LinkedIn: [@stephenchaffins](https://linkedin.com/in/stephen-chaffins-39412760)
 
 ***
 
