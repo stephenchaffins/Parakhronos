@@ -26,7 +26,7 @@
   * [VDS Packaging Master Script](#vds-packaging-master-script--pkhro_pkg_mastersh--to-be-ran-on-vds-master-as-root-)
   * [VDS Restoration Master Script ](#vds-restoration-master-script--pkhro_restore_mastersh--to-be-ran-on-cpanel-server-as-root-)
   * [:handshake: Contributing](#handshake-contributing)
-  * [Show your support](#show-your-support)
+  * [:star: Show your support](#show-your-support)
   * [:pencil:	 License](#pencil-license)
 <!-- TOC END -->
 
@@ -129,7 +129,7 @@ Logs for everything the script has done is at /var/log/parakhronos/CPANELUSERNAM
 
 Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/stephenchaffins/Parakhronos/issues).
 
-## Show your support
+## :star: Show your support
 
 Give a ⭐️ if this project helped you!
 
