@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T13:26:06-04:00
+# @Last modified time: 2020-08-12T13:30:54-04:00
 # -----------------------------------------------------------------------------
 
 
@@ -24,9 +24,9 @@ masteruserlist=( "$@" )
 # Find out what kind of server it is. VDS master, VDS client, or cpanel.
 # -----------------------------------------------------------------------------
 
-if [[ ! -f /usr/local/cpanel/cpanel ]] || [[ -d /sphera ]] ; then
+if [[ ! -f /usr/local/cpanel/cpanel && -d /sphera ]] ; then
   echo "This is VDS Master Server"
-elif [[ ! -f /usr/local/cpanel/cpanel ]] || [[ ! -d /sphera ]]; then
+elif [[ ! -f /usr/local/cpanel/cpanel && ! -d /sphera ]]; then
   echo "This is a VDS User Account"
 elif [[ -f /usr/local/cpanel/cpanel ]]; then
   echo "This is a cPanel Server"
