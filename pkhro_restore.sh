@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: pkhron_restore.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T06:10:05-04:00
+# @Last modified time: 2020-08-12T09:40:11-04:00
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
@@ -167,8 +167,12 @@ do
     echo -e "\e[1m\e[41m Addon domain $addom failed! Try creating it manually. \e[0m";
   fi
 
-
+if [ -z "$addom"];
+then
+  sleep 1;
+else
   rsync -a "$WORKDIR"/domain_files/"$addom"/ /home/"$cpUSER"/public_html/"$addom"/
+fi
 
   kill "$bgid"; echo
 
