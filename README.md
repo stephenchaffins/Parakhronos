@@ -1,4 +1,46 @@
-# Parakhronos
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+
+
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+
+  <h3 align="center">Parakhronos</h3>
+
+  <p align="center">
+    VDS to cPanel Migration Script
+    <br />
+    <a href="https://github.com/stephenchaffins/Parakhronos"><strong>Explore the docs »</strong></a>
+    <br />
+    <a href="https://github.com/stephenchaffins/Parakhronos/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/stephenchaffins/Parakhronos/issues">Request Feature</a>
+  </p>
+</p>
+
+
+
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+
+* [Packaging Script](#packaging-script)
+* [Usage](#usage)
+* [Roadmap](#roadmap)
+* [Contributing](#contributing)
+* [License](#license)
+* [Contact](#contact)
+* [Acknowledgements](#acknowledgements)
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
 Parakhronos is a migration application written to automate migrations between the legacy product "Sphera VDS Control Panel" to the new and ever updated cPanel control panel.
 
