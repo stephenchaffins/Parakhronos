@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T16:50:18-04:00
+# @Last modified time: 2020-08-12T16:51:51-04:00
 # -----------------------------------------------------------------------------
 
 
@@ -39,8 +39,8 @@ mkdir -p /root/
 mkdir -p /var/log/parakhronos_logs/
 
 # Logging
-LOG_FILE="/var/log/parakhronos_logs/main.log"
-exec > >(tee ${LOG_FILE}) 2>&1
+exec > >(tee -i /var/log/parakhronos_logs/main.log)
+exec 2>&1
 
 # Download the appropriate script for the server type.
 if [[ ! -f /usr/local/cpanel/cpanel ]]; then
