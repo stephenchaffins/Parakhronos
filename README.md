@@ -14,7 +14,7 @@ This is very basic. If you are wanting to migrate a single account, you can use 
 
 1. Login to the vds, download this file.
 
-    wget --no-check-certificate https://raw.githubusercontent.com/stephenchaffins/VDS-to-cPanel-Migration-Scripts/master/pkhro_pkg.sh; chmod 755 pkhro_pkg.sh
+    wget --no-check-certificate https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_pkg.sh; chmod 755 pkhro_pkg.sh
 
 
 2. To execute it just run:
@@ -36,7 +36,7 @@ Again, this is if you're  wanting to migrate a single account. This restores the
 2. rsync the file (/root/parakhronos_restore_USERNAME.tar.gz) from the VDS server to the cPanel server you plan on restoring to. This has to be at /root/parakhronos_restore_USERNAME.tar.gz on the cPanel server as well.
 3. Download this pkhro_restore.sh from this github repo.
 
-        wget --no-check-certificate https://raw.githubusercontent.com/stephenchaffins/VDS-to-cPanel-Migration-Scripts/master/pkhro_restore.sh; chmod 755 pkhro_restore.sh
+        wget --no-check-certificate https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_restore.sh; chmod 755 pkhro_restore.sh
 
 4. This must be executed with bash, not sh.
 
@@ -56,7 +56,7 @@ Logs for everything the script has done is at /var/log/parakhronos/CPANELUSERNAM
 
 2. Download this pkhro_pkg_master.sh from this github repo.
 
-        wget --no-check-certificate https://raw.githubusercontent.com/stephenchaffins/VDS-to-cPanel-Migration-Scripts/master/pkhro_pkg_master.sh; chmod 755 pkhro_pkg_master.sh
+        wget --no-check-certificate https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_pkg_master.sh; chmod 755 pkhro_pkg_master.sh
 
 3. You should just be able to run this. It will look like this:
 
@@ -72,7 +72,7 @@ Logs for everything the script has done is at /var/log/parakhronos/CPANELUSERNAM
 
 2. Download this pkhro_pkg_master.sh from this github repo.
 
-        wget --no-check-certificate https://raw.githubusercontent.com/stephenchaffins/VDS-to-cPanel-Migration-Scripts/master/pkhro_restore_master.sh; chmod 755 pkhro_restore_master.sh
+        wget --no-check-certificate https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_restore_master.sh; chmod 755 pkhro_restore_master.sh
 
 3. You should just be able to run this. It will look like this:
 

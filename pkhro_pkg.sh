@@ -4,10 +4,10 @@
 # @Author: Stephen Chaffins
 # @Date:   2017-02-28T13:48:19-05:00
 # @Email:  schaffins@techassets.com
-# @Project: VDS to cPanel Migration Scripts
+# @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T05:55:32-04:00
+# @Last modified time: 2020-08-12T06:10:19-04:00
 # -----------------------------------------------------------------------------
 
 exec 2>> /var/log/parakhronos.log

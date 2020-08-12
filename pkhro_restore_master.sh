@@ -4,10 +4,10 @@
 # @Author: Stephen Chaffins <schaffins>
 # @Date:   2017-02-28T13:48:19-05:00
 # @Email:  schaffins@jumpline.com
-# @Project: VDS to cPanel Migration Script Collection
+# @Project: Parakhronos
 # @Filename: vds2cp_restore_master.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T05:55:37-04:00
+# @Last modified time: 2020-08-12T06:10:11-04:00
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
@@ -19,7 +19,7 @@ cpusrs=( "$@" )
 
 if [ ! -f /root/pkhro_restore.sh ]
 then
-wget --no-check-certificate https://raw.githubusercontent.com/stephenchaffins/VDS-to-cPanel-Migration-Scripts/master/pkhro_restore.sh; chmod 755 pkhro_restore.sh
+wget --no-check-certificate https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_restore.sh; chmod 755 pkhro_restore.sh
 fi
 
 for i in "${cpusrs[@]}"

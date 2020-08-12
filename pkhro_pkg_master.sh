@@ -2,10 +2,10 @@
 # @Author: Stephen Chaffins <schaffins>
 # @Date:   2020-08-12T04:41:20-04:00
 # @Email:  schaffins@jumpline.com
-# @Project: VDS to cPanel Migration Script Collection
+# @Project: Parakhronos
 # @Filename: pkhro_pkg_master.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T05:55:25-04:00
+# @Last modified time: 2020-08-12T06:09:34-04:00
 # -----------------------------------------------------------------------------
 
 #!/bin/bash
@@ -33,7 +33,7 @@ fi
 # download the script to be used
 # -----------------------------------------------------------------------------
 
-wget -q --no-check-certificate https://raw.githubusercontent.com/stephenchaffins/VDS-to-cPanel-Migration-Scripts/master/pkhro_pkg.sh -O /root/pkhro_pkg.sh
+wget -q --no-check-certificate https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_pkg.sh -O /root/pkhro_pkg.sh
 
 # -----------------------------------------------------------------------------
 # The stuff. Everything here is ran  inside the vds/as the user. Making the
