@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T17:31:53-04:00
+# @Last modified time: 2020-08-12T17:43:42-04:00
 # -----------------------------------------------------------------------------
 
 
@@ -79,6 +79,11 @@ if [[ ! -f /usr/local/cpanel/cpanel ]] ; then
     su - $i -c 'cd /root/migration_scripts/; /bin/bash pkhro_pkg.sh'
     echo -e "\e[33m\e[1m Rsyncing $i to vmcp14... \e[0m";sleep 1; echo
     eval scp -v -P 1022 -i "$fullkeythost" ~$i/root/parakhronos_restore_$i.tar root@"$fulldesthost":/root/
+    if [[ $? -eq 0 ]]; then
+      echo -e "\e[33m\e[1m Rsyncing $i to vmcp14 was success! \e[0m";
+    else
+    echo -e "\e[1m\e[41m Rsync Failure!! \e[0m";echo
+    fi
     su - $i -c 'rm -rf /root/migration_scripts;'
     eval rm -f /root/pkhro_pkg.sh
   done
