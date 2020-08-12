@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T08:10:31-04:00
+# @Last modified time: 2020-08-12T08:15:24-04:00
 # -----------------------------------------------------------------------------
 
 exec 2>> /var/log/parakhronos.log
@@ -111,13 +111,19 @@ done &
 bgid=$!
 ##end ticking
 
+TMPemptychk=(cat "$WDIR"/text_files/"$VDSUSER"_addon_subdomains)
+
 while read line
 do
   d=`echo "$line" | awk '{print $1}'`
   s=`echo "$line" | awk '{print $2}'`
   mkdir -p /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
-  cp -R "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
-  #rsync -vaP "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
+  #cp -R "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
+  if [ "$TMPemptychk" -ge 1 ]; then
+    rsync -vaP "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
+  else
+    echo "nothing to rsync"
+  fi
 done < "$WDIR"/text_files/"$VDSUSER"_addon_subdomains;
 
 kill "$bgid";
