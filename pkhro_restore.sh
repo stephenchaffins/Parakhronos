@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: pkhron_restore.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T10:02:00-04:00
+# @Last modified time: 2020-08-12T10:11:53-04:00
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
@@ -118,7 +118,7 @@ while :; do
 done &
 bgid=$!
 
-whmapi1 --output=jsonpretty createacct username=$cpUSER domain=$mainDOM plan=Expanded
+whmapi1 --output=jsonpretty createacct username=$cpUSER domain=$mainDOM plan=Expanded password="$pWORD"
 
 kill "$bgid"; echo
 

@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: vds2cp_restore_master.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T10:02:16-04:00
+# @Last modified time: 2020-08-12T10:11:56-04:00
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
@@ -17,9 +17,8 @@
 IFS=$'\n'
 cpusrs=( "$@" )
 prsswoad=$(/bin/date +%N%s | base64 |cut -c -12)
-drowssap=`echo $prsswoad`
 
-if [ -f /root/pkhro_restore.sh ]
+if [ -f /root/pkhro_restore.sh ];then
 rm -f /root/pkhro_restore.sh
 fi
 
@@ -31,10 +30,10 @@ fi
 for i in "${cpusrs[@]}"
 do
   cpname=$(echo $i | cut -c -8)
-  echo $cpname "$drowssap" >> /var/log/mig_user_pass
+  echo $cpname "$prsswoad" >> /var/log/mig_user_pass
   echo -e "\e[33m\e[1m Restoring account $i \e[0m";sleep 1; echo
   eval cd /root/
-  eval ./pkhro_restore.sh $i $cpname "$drowssap"
+  eval ./pkhro_restore.sh $i $cpname "$prsswoad"
   sleep 10;
   echo;
 done
@@ -42,5 +41,6 @@ done
 echo -e "\e[33m\e[1m COPY THESE PASSWORDS NOW!!! THEY EXIST NOWHERE ELSE. IF YOU DONT SAVE THESE NOW, YOU WILL HAVE TO REGENERATE FOR ALL CUSTOMERS MIGRATED $i \e[0m";sleep 1; echo
 cat /var/log/mig_user_pass
 rm -f /var/log/mig_user_pass
+rm -f /root/pkhro_restore.sh
 
 exit 0
