@@ -20,28 +20,14 @@
 
 ## Prerequisites
 
-- npm >=5.5.0
-- node >=9.3.0
+- bash >=3.00.15
 
 ## Author
 
 👤 **Stephen Chaffins**
 
 * GitHub: [@stephenchaffins](https://github.com/stephenchaffins)
-* LinkedIn: [@stephenchaffins@gmail.com](https://linkedin.com/in/stephenchaffins@gmail.com)
-
-## 🤝 Contributing
-
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/stephenchaffins/Parakhronos/issues).
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
-## 📝 License
-
-Copyright © 2020 [Stephen Chaffins](https://github.com/stephenchaffins).<br />
-This project is [GNU](https://github.com/stephenchaffins/Parakhronos/blob/master/LICENSE) licensed.
+* LinkedIn: [@stephenchaffins@gmail.com](https://linkedin.com/in/stephen-chaffins-39412760)
 
 ***
 
@@ -121,3 +107,17 @@ Logs for everything the script has done is at /var/log/parakhronos/CPANELUSERNAM
         ./pkhro_restore_master.sh USER1 USER2 USER3 USERETC
 
 4. This should restore all of the accounts you specified, and SHOULD output a list of passwords created, that correspond with each account. This list isnt saved anywhere, so you need to save it then delete after you update your records/billing client.
+
+***
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/stephenchaffins/Parakhronos/issues).
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+## 📝 License
+
+Copyright © 2020 [Stephen Chaffins](https://github.com/stephenchaffins).<br />
+This project is [GNU](https://github.com/stephenchaffins/Parakhronos/blob/master/LICENSE) licensed.
