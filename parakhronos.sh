@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T13:25:06-04:00
+# @Last modified time: 2020-08-12T13:26:06-04:00
 # -----------------------------------------------------------------------------
 
 
@@ -30,6 +30,7 @@ elif [[ ! -f /usr/local/cpanel/cpanel ]] || [[ ! -d /sphera ]]; then
   echo "This is a VDS User Account"
 elif [[ -f /usr/local/cpanel/cpanel ]]; then
   echo "This is a cPanel Server"
+  echo $masteruserlist
 else
   echo "WHAT IS THIS SERVER?!"
 fi
