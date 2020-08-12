@@ -17,17 +17,6 @@
 
 ### :house_with_garden: [Homepage](https://github.com/stephenchaffins/Parakhronos)
 
-- [Prerequisites](#prerequisites)
-- [Author](#author)
-- [About Parakhronos](#about-parakhronos)
-- [VDS Packaging Script](#vds-packaging-script-pkhro-pkgsh-to-be-ran-inside-the-vds)
-- [VDS Restoration Script](#vds-to-cpanel-restoration-script-pkhro-restoresh-to-be-ran-on-cpanel)
-- [VDS Packaging Master Script](#vds-packaging-master-script-pkhro-pkg-mastersh-to-be-ran-on-vds-master-as-root)
-- [VDS Restoration Master Script](#vds-restoration-master-script-pkhro-restore-mastersh-to-be-ran-on-cpanel-server-as-root)
-- [:handshake: Contributing](#handshake-contributing)
-- [:star: Show your support](#show-your-support)
-- [:pencil: License](#pencil-license)
-
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 
