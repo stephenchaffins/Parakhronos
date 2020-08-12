@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T16:40:49-04:00
+# @Last modified time: 2020-08-12T16:46:25-04:00
 # -----------------------------------------------------------------------------
 
 
@@ -40,7 +40,8 @@ mkdir -p /var/log/parakhronos_logs/
 
 # Logging
 LOG_FILE="/var/log/parakhronos_logs/main.log"
-exec > >(tee ${LOG_FILE}) 2>&1
+exec > >(tee -i ${LOG_FILE})
+exec 2>&1
 
 
 # Download the appropriate script for the server type.
