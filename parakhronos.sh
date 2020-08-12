@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T14:38:26-04:00
+# @Last modified time: 2020-08-12T14:48:57-04:00
 # -----------------------------------------------------------------------------
 
 
@@ -19,7 +19,7 @@
 
 IFS=$'\n'
 masteruserlist=( "$@" )
-rand0pass=$(/bin/date +%N%s | base64 |cut -c -12)
+rand0pass=$(/bin/date +%N%s | openssl enc -base64 |cut -c -12)
 
 # -----------------------------------------------------------------------------
 # Some basic checks, for and to create directories and ensure things can get
