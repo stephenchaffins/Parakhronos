@@ -17,6 +17,21 @@
 
 ### :house_with_garden: [Homepage](https://github.com/stephenchaffins/Parakhronos)
 
+* [:house_with_garden: [Homepage](https://github.com/stephenchaffins/Parakhronos)](#-house-with-garden---homepage--https---githubcom-stephenchaffins-parakhronos-)
+- [Prerequisites](#prerequisites)
+- [Author](#author)
+- [About Parakhronos](#about-parakhronos)
+- [VDS Packaging Script : pkhro_pkg.sh [ To be ran inside the VDS ]](#vds-packaging-script---pkhro-pkgsh---to-be-ran-inside-the-vds--)
+- [VDS to cPanel Restoration Script : pkhro_restore.sh [ To be ran on cPanel ]](#vds-to-cpanel-restoration-script---pkhro-restoresh---to-be-ran-on-cpanel--)
+- [VDS Packaging Master Script : pkhro_pkg_master.sh [ To be ran on VDS master as root ]](#vds-packaging-master-script---pkhro-pkg-mastersh---to-be-ran-on-vds-master-as-root--)
+- [VDS Restoration Master Script : pkhro_restore_master.sh [ To be ran on cPanel server as root ]](#vds-restoration-master-script---pkhro-restore-mastersh---to-be-ran-on-cpanel-server-as-root--)
+- [:handshake: Contributing](#-handshake--contributing)
+- [Show your support](#show-your-support)
+- [:pencil:  License](#-pencil---license)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 ## Prerequisites
 
 - bash >=3.00.15
