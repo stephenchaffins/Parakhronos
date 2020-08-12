@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T08:40:45-04:00
+# @Last modified time: 2020-08-12T09:17:27-04:00
 # -----------------------------------------------------------------------------
 
 exec 2>> /var/log/parakhronos.log
@@ -87,9 +87,16 @@ echo -e "\e[33m\e[1m Getting Parked/Aliased domains list... \e[0m"; echo
 # -----------------------------------------------------------------------------
 # Singling out the parked domains.
 # -----------------------------------------------------------------------------
-excadon=`cat "$WDIR"/text_files/"$VDSUSER"_addonsub_list | awk -F "\ " '{print $1}'`
+excadon=`cat "$WDIR"/text_files/"$VDSUSER"_addonsub_list | awk -F '\' '{print $1}'`
 cat /etc/mail/virtusertable |awk '{print $1}'|grep -vE '\#|^$'| sed '/^@/ d'|sed 's/.*@//'| grep -v 'www.'| sort -u >  "$WDIR"/text_files/"$VDSUSER"_all_domains
-cat "$WDIR"/text_files/"$VDSUSER"_all_domains |grep -Ev "$MDOM|$excadon" | sed 's/www\.//' > "$WDIR"/text_files/"$VDSUSER"_parked_domains
+
+if [ -z "$excadon" ]; then
+  cat "$WDIR"/text_files/"$VDSUSER"_all_domains |grep -v "$MDOM" | sed 's/www\.//' > "$WDIR"/text_files/"$VDSUSER"_parked_domains
+else
+  cat "$WDIR"/text_files/"$VDSUSER"_all_domains |grep -v "$MDOM" |grep -v "$excadon" | sed 's/www\.//' > "$WDIR"/text_files/"$VDSUSER"_parked_domains
+fi
+
+#cat "$WDIR"/text_files/"$VDSUSER"_all_domains |grep -v "$MDOM" |grep -v "$excadon" | sed 's/www\.//' > "$WDIR"/text_files/"$VDSUSER"_parked_domains
 
 # -----------------------------------------------------------------------------
 # Gathering addon domains whos paths are not specifically /var/www/html.
@@ -139,7 +146,7 @@ while :; do
 done &
 bgid=$!
 ##end ticking
-TMPemptychk2=`cat "$WDIR"/text_files/"$VDSUSER"_subdomain_list`
+TMPemptychk2=$(cat "$WDIR"/text_files/"$VDSUSER"_subdomain_list)
 
 while read sdcopy
 do
