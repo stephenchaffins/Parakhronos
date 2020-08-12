@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T07:56:28-04:00
+# @Last modified time: 2020-08-12T07:58:41-04:00
 # -----------------------------------------------------------------------------
 
 exec 2>> /var/log/parakhronos.log
@@ -165,8 +165,8 @@ do
   cp -R /var/www/html/$fline $WDIR/domain_files/$MDOM/
 done < "$WDIR"/text_files/mdom_exlist
 
-rm "$WDIR"/text_files/mdom_exlist
-rm "$WDIR"/text_files/tmp_excludes
+#rm "$WDIR"/text_files/mdom_exlist
+#rm "$WDIR"/text_files/tmp_excludes
 
 kill "$bgid"; echo
 
