@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T17:28:37-04:00
+# @Last modified time: 2020-08-12T17:31:53-04:00
 # -----------------------------------------------------------------------------
 
 
@@ -78,7 +78,7 @@ if [[ ! -f /usr/local/cpanel/cpanel ]] ; then
     echo -e "\e[33m\e[1m Running pkhro_pkg.sh inside of $i VDS... \e[0m";sleep 1; echo
     su - $i -c 'cd /root/migration_scripts/; /bin/bash pkhro_pkg.sh'
     echo -e "\e[33m\e[1m Rsyncing $i to vmcp14... \e[0m";sleep 1; echo
-    eval scp -P 1022 -i "$fullkeythost" ~$i/root/parakhronos_restore_$i.tar root@"$fulldesthost":/root/
+    eval scp -v -P 1022 -i "$fullkeythost" ~$i/root/parakhronos_restore_$i.tar root@"$fulldesthost":/root/
     su - $i -c 'rm -rf /root/migration_scripts;'
     eval rm -f /root/pkhro_pkg.sh
   done
