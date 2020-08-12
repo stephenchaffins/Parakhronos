@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T08:00:22-04:00
+# @Last modified time: 2020-08-12T08:02:10-04:00
 # -----------------------------------------------------------------------------
 
 exec 2>> /var/log/parakhronos.log
@@ -48,7 +48,7 @@ echo
 # Get a list of email accounts
 # -----------------------------------------------------------------------------
 echo -e "\e[33m\e[1m Getting Email Account list... \e[0m"
-cat /etc/mail/virtusertable |awk '{print $1}'|grep -vE '\#|MAILER-DAEMON|postmaster|^$|root\@|ftp\@'| sed '/^@/ d' > "$WDIR"/text_files/"$VDSUSER"_mailusers;sleep 1;echo
+cat /etc/mail/virtusertable |awk '{print $1}'|grep -vE '\#|MAILER-DAEMON|postmaster|^$|root\@|ftp\@'| sed '/^@/ d'|sed 's/www\.//' |uniq > "$WDIR"/text_files/"$VDSUSER"_mailusers;sleep 1;echo
 
 echo -e "\e[33m\e[1m Copying mailbox data... \e[0m";
 
