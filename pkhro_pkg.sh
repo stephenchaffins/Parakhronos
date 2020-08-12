@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T09:17:27-04:00
+# @Last modified time: 2020-08-12T09:19:19-04:00
 # -----------------------------------------------------------------------------
 
 exec 2>> /var/log/parakhronos.log
@@ -234,7 +234,7 @@ echo -e "\e[33m\e[1m Archiving of all data now complete..."; echo
 # Remove all the backed up files that we tar'd up. Leaving the tar.gz will.
 # -----------------------------------------------------------------------------
 echo -e "\e[33m\e[1m Cleaning Up data and packaging files... \e[0m";echo
-#rm -rf "$WDIR"
+rm -rf "$WDIR"
 
 # -----------------------------------------------------------------------------
 # Signaling the script has completed.
