@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: pkhron_restore.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T16:50:20-04:00
+# @Last modified time: 2020-08-12T16:57:07-04:00
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
@@ -18,8 +18,8 @@ cpUSER=$2
 pWORD=$3
 WORKDIR=/root/"$vdsUSER"_restore
 PWSTRNG=$(whmapi1 get_password_strength password="$3" |grep "strength:"| awk '{gsub(" strength: ", "");print}')
-exec > >(tee -i /var/log/parakhronos_logs/main.log)
-exec 2>&1
+#exec > >(tee -i /var/log/parakhronos_logs/main.log)
+#exec 2>&1
 
 
 trap "exit 1" TERM
