@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-12T17:43:42-04:00
+# @Last modified time: 2020-08-16T21:27:45-04:00
 # -----------------------------------------------------------------------------
 
 
@@ -28,11 +28,6 @@ function dye()
    kill -s TERM $TOP_PID
 }
 
-echo "Type the full hostname of the destination/cPanel server, followed by [ENTER]:"
-read fulldesthost
-
-echo "Type the full path of the SSH key you wish to use, followed by [ENTER]:"
-read fullkeythost
 
 # -----------------------------------------------------------------------------
 # Some basic checks to create directories and files necessary to
@@ -52,6 +47,29 @@ exec 2> /var/log/parakhronos_logs/stderr.log 1> >(tee -i /var/log/parakhronos_lo
 if [[ ! -f /usr/local/cpanel/cpanel ]]; then
   wget -q --no-check-certificate --no-cache --no-cookie https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_pkg.sh -O /root/pkhro_pkg.sh
   chmod 755 /root/pkhro_pkg.sh
+          while :; do
+            echo "Would you like this script to auto-copy the packaged account file to the destination server? [Y]es/[n]o"
+            read shouldrsync
+            echo
+            if [ "$shouldrsync" = "Y" ] || [ "$shouldrsync" = "Yes" ] || [ "$shouldrsync" = "y" ] || [ "$shouldrsync" = "yes" ]; then
+              echo "Type the full hostname of the destination/cPanel server, followed by [ENTER]:";
+              read fulldesthost
+              echo
+
+              echo "Type the full path of the SSH key you wish to use, followed by [ENTER]:"
+              read fullkeythost
+              shouldrsync="10"
+              echo
+              break
+            elif [ "$shouldrsync" = "N" ] || [ "$shouldrsync" = "No" ] || [ "$shouldrsync" = "n" ] || [ "$shouldrsync" = "No" ]; then
+              echo "No problemo, no rsyncing at the end."; echo;
+              shouldrsync="11"
+              break
+            else
+              echo -e "\e[33m\e[1m Unrecognizable Response, Please enter [Y]es or [N]o. \e[0m";echo;echo;
+            fi
+          done
+          echo "$shouldrsync"
 elif [[ -f /usr/local/cpanel/cpanel ]]; then
   wget -q --no-check-certificate --no-cache --no-cookie https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_restore.sh -O /root/pkhro_restore.sh
   chmod 755 /root/pkhro_restore.sh
@@ -77,13 +95,15 @@ if [[ ! -f /usr/local/cpanel/cpanel ]] ; then
     eval chown $i: -R "~$i/root/migration_scripts/"
     echo -e "\e[33m\e[1m Running pkhro_pkg.sh inside of $i VDS... \e[0m";sleep 1; echo
     su - $i -c 'cd /root/migration_scripts/; /bin/bash pkhro_pkg.sh'
-    echo -e "\e[33m\e[1m Rsyncing $i to vmcp14... \e[0m";sleep 1; echo
-    eval scp -v -P 1022 -i "$fullkeythost" ~$i/root/parakhronos_restore_$i.tar root@"$fulldesthost":/root/
-    if [[ $? -eq 0 ]]; then
-      echo -e "\e[33m\e[1m Rsyncing $i to vmcp14 was success! \e[0m";
-    else
-    echo -e "\e[1m\e[41m Rsync Failure!! \e[0m";echo
-    fi
+        if [ "$shouldrsync" -eq "10" ]; then
+        echo -e "\e[33m\e[1m Rsyncing $i to vmcp14... \e[0m";sleep 1; echo
+        eval scp -v -P 1022 -i "$fullkeythost" ~$i/root/parakhronos_restore_$i.tar root@"$fulldesthost":/root/
+            if [[ $? -eq 0 ]]; then
+              echo -e "\e[33m\e[1m Rsyncing $i to vmcp14 was success! \e[0m";
+            else
+            echo -e "\e[1m\e[41m Rsync Failure!! \e[0m";echo
+            fi
+        fi
     su - $i -c 'rm -rf /root/migration_scripts;'
     eval rm -f /root/pkhro_pkg.sh
   done
