@@ -7,7 +7,7 @@
 # @Project: Parakhronos
 # @Filename: parakhronos.sh
 # @Last modified by:   schaffins
-# @Last modified time: 2020-08-16T21:27:45-04:00
+# @Last modified time: 2020-08-17T00:21:44-04:00
 # -----------------------------------------------------------------------------
 
 
@@ -40,10 +40,14 @@ mkdir -p /root/
 mkdir -p /var/log/parakhronos_logs/
 
 # Logging
-
 exec 2> /var/log/parakhronos_logs/stderr.log 1> >(tee -i /var/log/parakhronos_logs/stdout.log)
 
-# Download the appropriate script for the server type.
+# -----------------------------------------------------------------------------
+# Checking which server type is running, cPanel or VDS. Once determined this
+# will download the appropriate pkg or restore script. If downloading the pkg
+# script, it will also ask if you want to have it migrate to a destination
+# server once packaged.
+# -----------------------------------------------------------------------------
 if [[ ! -f /usr/local/cpanel/cpanel ]]; then
   wget -q --no-check-certificate --no-cache --no-cookie https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_pkg.sh -O /root/pkhro_pkg.sh
   chmod 755 /root/pkhro_pkg.sh
@@ -80,8 +84,12 @@ fi
 
 
 # -----------------------------------------------------------------------------
-# Find out what kind of server it is. VDS master, VDS client, or cpanel. Then
-# kick off the appropriate package or restore script.
+# Again checking which server this is (probably could store that as a variable)
+# in the previous check). Then, this makes some directories, copies the script
+# and runs it. If VDS was chosen, this is the part that scp's to the
+# destination server. The cPanel version generates a unique password for each
+# account, restores then displays it after it restores the accounts.
+# Then this cleans up everything except the original pkg file.
 # -----------------------------------------------------------------------------
 
 if [[ ! -f /usr/local/cpanel/cpanel ]] ; then
