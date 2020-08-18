@@ -121,7 +121,7 @@ if [[ ! -f /usr/local/cpanel/cpanel ]] ; then
         bgid=$!
         ##end ticking
 
-            eval scp -v -P 1022 -i "$fullkeythost" ~"$i/root/parakhronos_restore_$i.tar" root@"$fulldesthost":/root/
+            eval scp -P 1022 -i "$fullkeythost" ~"$i/root/parakhronos_restore_$i.tar" root@"$fulldesthost":/root/
 
         kill "$bgid"; echo
 
