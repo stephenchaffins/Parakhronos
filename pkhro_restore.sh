@@ -359,7 +359,7 @@ do
   db=$(mysqlshow "$dbNAME" |grep -v Wildcard |grep -o "$dbNAME" |wc -l)
   tibles=$(mysqlshow "$dbNAME" |grep -v Wildcard |wc -l)
 
-  if [ "$db" -eq 1 ] && [ "$tibles" > 5 ]; then
+  if [ "$db" -eq 1 ] && [ "$tibles" -gt 5 ]; then
     echo -e "\e[32m Database $dbNAME restoration complete. \e[0m"; echo
   else
     echo -e "\e[1m\e[41m Database $dbNAME restoration Failed! Try restoring it manually! \e[0m"
