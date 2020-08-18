@@ -226,7 +226,7 @@ rm -rf "$WDIR"
 # -----------------------------------------------------------------------------
 # Signaling the script has completed.
 # -----------------------------------------------------------------------------
-echo -e "\e[1m\e[44m parakhronos_restore_`echo $VDSUSER`.tar file backed up to /root/parakhronos_restore_`echo $VDSUSER`.tar \e[0m";sleep 1;
+echo -e "\e[1m\e[44m parakhronos_restore_`echo $VDSUSER`.tar file backed up to ~$i/root/parakhronos_restore_`echo $VDSUSER`.tar \e[0m";sleep 1;
 echo
 
 echo -e "\e[1m\e[41m Exiting. Done. \e[0m";echo
