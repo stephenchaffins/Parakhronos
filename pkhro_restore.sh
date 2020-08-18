@@ -27,8 +27,8 @@ export TOP_PID=$$
 
 function dye()
 {
-   echo -e "\e[1m\e[41m Try Again! \e[0m"
-   kill -s TERM $TOP_PID
+  echo -e "\e[1m\e[41m Try Again! \e[0m"
+  kill -s TERM $TOP_PID
 }
 # -----------------------------------------------------------------------------
 # Check for required arguments before starting
@@ -64,9 +64,9 @@ echo
 echo -e "\e[33m\e[1m Checking for Date::Parse. Installation can take some time. \e[0m";
 
 if (perldoc -l Date::Parse | grep -q "Date/Parse.pm")
- then
-   echo
-   echo -e "\e[1m\e[32m Date::Parse is already installed! \e[0m" ;
+then
+  echo
+  echo -e "\e[1m\e[32m Date::Parse is already installed! \e[0m" ;
 else
   cpan -i Date::Parse
 fi
@@ -87,7 +87,7 @@ if [ ! -f /root/parakhronos_restore_"$vdsUSER".tar ]; then
 else
   echo -e "\e[33m\e[1m Extracting parakhronos_restore_$cpUSER.tar now... \e[0m \e[0m \e[30;48;5;226m This can SERIOUSLY take a long time. \e[0m"
   while :; do
-    printf "."
+    for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done
     sleep 5
   done &
   bgid=$!
@@ -112,7 +112,7 @@ mainDOM=$(awk '{print $1}' "$WORKDIR"/text_files/"$vdsUSER"_main_domain |sed 's/
 echo -e "\e[32m Creating cPanel account for domain $mainDOM as user $cpUSER \e[0m";sleep 1;echo
 
 while :; do
-  printf "."
+  for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done
   sleep 5
 done &
 bgid=$!
@@ -149,7 +149,7 @@ do
 
 
   while :; do
-    printf "."
+    for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done
     sleep 5
   done &
   bgid=$!
@@ -166,12 +166,12 @@ do
     echo -e "\e[1m\e[41m Addon domain $addom failed! Try creating it manually. \e[0m";
   fi
 
-if [ -z "$addom"];
-then
-  sleep 1;
-else
-  rsync -a "$WORKDIR"/domain_files/"$addom"/ /home/"$cpUSER"/public_html/"$addom"/
-fi
+  if [ -z "$addom"];
+  then
+    sleep 1;
+  else
+    rsync -a "$WORKDIR"/domain_files/"$addom"/ /home/"$cpUSER"/public_html/"$addom"/
+  fi
 
   kill "$bgid"; echo
 
@@ -238,7 +238,7 @@ do
   fi;
 
   while :; do
-    printf "."
+    for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done
     sleep 5
   done &
   bgid=$!
@@ -262,7 +262,7 @@ done < "$WORKDIR"/text_files/"$vdsUSER"_subdomain_list;
 echo -e "\e[33m\e[1m Copying the Main Domain data files...  \e[0m";
 
 while :; do
-  printf "."
+  for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done
   sleep 5
 done &
 bgid=$!

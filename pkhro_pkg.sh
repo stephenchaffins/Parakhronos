@@ -231,4 +231,4 @@ echo
 
 echo -e "\e[1m\e[41m Exiting. Done. \e[0m";echo
 sleep 1;
-exit 0;
+exit 0

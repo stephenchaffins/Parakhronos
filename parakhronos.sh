@@ -19,13 +19,12 @@
 
 IFS=$'\n'
 masteruserlist=( "$@" )
-rand0pass=$(/bin/date +%N%s | openssl enc -base64 |cut -c -12)
 
 # function to kill the script if theres a Catastrophic Failure.
 function dye()
 {
-   echo -e "\e[1m\e[41m Try Again! \e[0m"
-   kill -s TERM $TOP_PID
+  echo -e "\e[1m\e[41m Try Again! \e[0m"
+  kill -s TERM $TOP_PID
 }
 
 
@@ -51,33 +50,33 @@ exec 2> /var/log/parakhronos_logs/stderr.log 1> >(tee -i /var/log/parakhronos_lo
 if [[ ! -f /usr/local/cpanel/cpanel ]]; then
   wget -q --no-check-certificate --no-cache --no-cookie https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_pkg.sh -O /root/pkhro_pkg.sh
   chmod 755 /root/pkhro_pkg.sh
-          while :; do
-            echo
-            echo -e "\e[93m -------------------------------------------------------------------------------- \e[0m"
-            echo -e "\e[93m ######################### \e[91m\e[1m Configuration / Setup  \e[0m\e[93m############################## \e[0m"
-            echo -e "\e[93m -------------------------------------------------------------------------------- \e[0m"        #
-            echo
-            echo -e "\e[91m\e[1mWould you like this script to auto-copy the packaged account file to the destination server?\e[0m\e[1m [Y]es/[n]o \e[0m"
-            read shouldrsync
-            echo
-            if [ "$shouldrsync" = "Y" ] || [ "$shouldrsync" = "Yes" ] || [ "$shouldrsync" = "y" ] || [ "$shouldrsync" = "yes" ]; then
-              echo -e "\e[91m\e[1mType the full hostname of the destination/cPanel server, followed by [ENTER]:\e[0m";
-              read fulldesthost
-              echo
+  while :; do
+    echo
+    echo -e "\e[93m -------------------------------------------------------------------------------- \e[0m"
+    echo -e "\e[93m ######################### \e[91m\e[1m Configuration / Setup  \e[0m\e[93m############################## \e[0m"
+    echo -e "\e[93m -------------------------------------------------------------------------------- \e[0m"        #
+    echo
+    echo -e "\e[91m\e[1mWould you like this script to auto-copy the packaged account file to the destination server?\e[0m\e[1m [Y]es/[n]o \e[0m"
+    read shouldrsync
+    echo
+    if [ "$shouldrsync" = "Y" ] || [ "$shouldrsync" = "Yes" ] || [ "$shouldrsync" = "y" ] || [ "$shouldrsync" = "yes" ]; then
+      echo -e "\e[91m\e[1mType the full hostname of the destination/cPanel server, followed by [ENTER]:\e[0m";
+      read fulldesthost
+      echo
 
-              echo -e "\e[91m\e[1mType the full path of the SSH key you wish to use, followed by [ENTER]:\e[0m"
-              read fullkeythost
-              shouldrsync="10"
-              echo
-              break
-            elif [ "$shouldrsync" = "N" ] || [ "$shouldrsync" = "No" ] || [ "$shouldrsync" = "n" ] || [ "$shouldrsync" = "No" ]; then
-              echo "No problemo, no rsyncing at the end."; echo;
-              shouldrsync="11"
-              break
-            else
-              echo -e "\e[33m\e[1m Unrecognizable Response, Please enter [Y]es or [N]o. \e[0m";echo;echo;
-            fi
-          done
+      echo -e "\e[91m\e[1mType the full path of the SSH key you wish to use, followed by [ENTER]:\e[0m"
+      read fullkeythost
+      shouldrsync="10"
+      echo
+      break
+    elif [ "$shouldrsync" = "N" ] || [ "$shouldrsync" = "No" ] || [ "$shouldrsync" = "n" ] || [ "$shouldrsync" = "No" ]; then
+      echo "No problemo, no rsyncing at the end."; echo;
+      shouldrsync="11"
+      break
+    else
+      echo -e "\e[33m\e[1m Unrecognizable Response, Please enter [Y]es or [N]o. \e[0m";echo;echo;
+    fi
+  done
 elif [[ -f /usr/local/cpanel/cpanel ]]; then
   wget -q --no-check-certificate --no-cache --no-cookie https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_restore.sh -O /root/pkhro_restore.sh
   chmod 755 /root/pkhro_restore.sh
@@ -111,27 +110,27 @@ if [[ ! -f /usr/local/cpanel/cpanel ]] ; then
     eval chown $i: -R ~"$i/root/migration_scripts/"
     echo -e "\e[33m\e[1m Running pkhro_pkg.sh inside of $i VDS... \e[0m";sleep 1;
     su - $i -c 'cd /root/migration_scripts/; /bin/bash pkhro_pkg.sh'
-        if [ "$shouldrsync" -eq "10" ]; then
-        echo -e "\e[33m\e[1m Rsyncing $i to vmcp14... \e[0m";sleep 1;
+    if [ "$shouldrsync" -eq "10" ]; then
+      echo -e "\e[33m\e[1m Rsyncing $i to vmcp14... \e[0m";sleep 1;
 
-        ##ticking
-        while :; do
-          for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done
-        done &
-        bgid=$!
-        ##end ticking
+      ##ticking
+      while :; do
+        for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done
+      done &
+      bgid=$!
+      ##end ticking
 
-            eval scp -P 1022 -i "$fullkeythost" ~"$i/root/parakhronos_restore_$i.tar" root@"$fulldesthost":/root/
+      eval scp -P 1022 -i "$fullkeythost" ~"$i/root/parakhronos_restore_$i.tar" root@"$fulldesthost":/root/
 
-        kill "$bgid"; echo
+      kill "$bgid"; echo
 
-            if [[ $? -eq 0 ]]; then
-              echo
-              echo -e "\e[33m\e[1m Rsyncing $i to vmcp14 was success! \e[0m";
-            else
-            echo -e "\e[1m\e[41m Rsync Failure!! \e[0m";echo
-            fi
-        fi
+      if [[ $? -eq 0 ]]; then
+        echo
+        echo -e "\e[33m\e[1m Rsyncing $i to vmcp14 was success! \e[0m";
+      else
+        echo -e "\e[1m\e[41m Rsync Failure!! \e[0m";echo
+      fi
+    fi
     eval rm -rf ~"$i/root/migration_scripts"
     eval rm -f ~"$i/root/pkhro_pkg.sh"
     echo
@@ -143,6 +142,7 @@ if [[ ! -f /usr/local/cpanel/cpanel ]] ; then
 elif [[ -f /usr/local/cpanel/cpanel ]]; then
   for i in "${masteruserlist[@]}"
   do
+    rand0pass=$(/bin/date +%N%s | openssl enc -base64 |cut -c -12)
     cpname=$(echo $i | cut -c -8)
     echo "$cpname" "$rand0pass" >> /var/log/mig_user_pass
     echo -e "\e[33m\e[1m Restoring account $i \e[0m";sleep 1; echo
