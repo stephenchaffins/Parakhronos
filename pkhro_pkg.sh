@@ -178,7 +178,8 @@ ls /var/www/html/|grep -v '^manager.html$' |grep -v '^plugins$' |grep -v '^fm$' 
 ##end ticking
 
 while true;do echo -n .;sleep 2;done &
-
+ while :;do for s in / - \\ \|; do printf "\r$s";sleep 1;done;done
+ 
 while read fline
 do
   cp -R /var/www/html/$fline $WDIR/domain_files/$MDOM/
