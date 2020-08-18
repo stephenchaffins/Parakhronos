@@ -114,14 +114,17 @@ if [[ ! -f /usr/local/cpanel/cpanel ]] ; then
         if [ "$shouldrsync" -eq "10" ]; then
         echo -e "\e[33m\e[1m Rsyncing $i to vmcp14... \e[0m";sleep 1;
 
-        while true;do echo -ne "";sleep 2;done &
-         while :;do for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done;done
+        ##ticking
+        while :; do
+          for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done
+        done &
+        bgid=$!
+        ##end ticking
 
             eval scp -v -P 1022 -i "$fullkeythost" ~"$i/root/parakhronos_restore_$i.tar" root@"$fulldesthost":/root/
 
-            kill $!; trap 'kill $!' SIGTERM
-            echo done
-            
+        kill "$bgid"; echo
+
             if [[ $? -eq 0 ]]; then
               echo
               echo -e "\e[33m\e[1m Rsyncing $i to vmcp14 was success! \e[0m";
