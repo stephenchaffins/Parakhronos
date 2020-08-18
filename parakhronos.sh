@@ -52,16 +52,20 @@ if [[ ! -f /usr/local/cpanel/cpanel ]]; then
   wget -q --no-check-certificate --no-cache --no-cookie https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_pkg.sh -O /root/pkhro_pkg.sh
   chmod 755 /root/pkhro_pkg.sh
           while :; do
-            echo;echo;echo
-            echo "Would you like this script to auto-copy the packaged account file to the destination server? [Y]es/[n]o"
+            echo
+            echo -e "\e[93m -------------------------------------------------------------------------------- \e[0m"
+            echo -e "\e[93m ######################### \e[91m\e[1m Configuration / Setup  \e[0m\e[93m############################## \e[0m"
+            echo -e "\e[93m -------------------------------------------------------------------------------- \e[0m"        #
+            echo
+            echo -e "\e[91m\e[1mWould you like this script to auto-copy the packaged account file to the destination server?\e[0m\e[1m [Y]es/[n]o \e[0m"
             read shouldrsync
             echo
             if [ "$shouldrsync" = "Y" ] || [ "$shouldrsync" = "Yes" ] || [ "$shouldrsync" = "y" ] || [ "$shouldrsync" = "yes" ]; then
-              echo "Type the full hostname of the destination/cPanel server, followed by [ENTER]:";
+              echo -e "\e[91m\e[1mType the full hostname of the destination/cPanel server, followed by [ENTER]:\e[0m";
               read fulldesthost
               echo
 
-              echo "Type the full path of the SSH key you wish to use, followed by [ENTER]:"
+              echo -e "\e[91m\e[1mType the full path of the SSH key you wish to use, followed by [ENTER]:\e[0m"
               read fullkeythost
               shouldrsync="10"
               echo
@@ -108,7 +112,7 @@ if [[ ! -f /usr/local/cpanel/cpanel ]] ; then
     echo -e "\e[33m\e[1m Running pkhro_pkg.sh inside of $i VDS... \e[0m";sleep 1; echo
     su - $i -c 'cd /root/migration_scripts/; /bin/bash pkhro_pkg.sh'
         if [ "$shouldrsync" -eq "10" ]; then
-        echo -e "\e[33m\e[1m Rsyncing $i to vmcp14... \e[0m";sleep 1; echo
+        echo -e "\e[33m\e[1m Rsyncing $i to vmcp14... \e[0m";sleep 1;
 
         while :; do
           printf " ."
@@ -121,6 +125,7 @@ if [[ ! -f /usr/local/cpanel/cpanel ]] ; then
         kill "$bgid";
 
             if [[ $? -eq 0 ]]; then
+              echo
               echo -e "\e[33m\e[1m Rsyncing $i to vmcp14 was success! \e[0m";
             else
             echo -e "\e[1m\e[41m Rsync Failure!! \e[0m";echo
@@ -128,9 +133,11 @@ if [[ ! -f /usr/local/cpanel/cpanel ]] ; then
         fi
     eval rm -rf ~"$i/root/migration_scripts"
     eval rm -f ~"$i/root/pkhro_pkg.sh"
+    echo
     echo -e "\e[93m -------------------------------------------------------------------------------- \e[0m"
     echo -e "\e[93m ############################ \e[91m\e[1mAccount "$i" Migrated \e[0m\e[93m################################## \e[0m"
     echo -e "\e[93m -------------------------------------------------------------------------------- \e[0m"
+    echo;echo
   done
 elif [[ -f /usr/local/cpanel/cpanel ]]; then
   for i in "${masteruserlist[@]}"

@@ -127,7 +127,7 @@ do
   if [ "$TMPemptychk" -ge 1 ]; then
     rsync -vaP "$s"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$d/
   else
-    echo "nothing to rsync"
+    echo;echo "nothing to rsync"
   fi
 done < "$WDIR"/text_files/"$VDSUSER"_addon_subdomains;
 
@@ -153,7 +153,7 @@ do
   if [ "$TMPemptychk2" -ge 1 ]; then
     rsync -vaP "$scop"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$dcop/
   else
-    echo "nothing to rsync"
+    echo;echo "nothing to rsync"
   fi
   #cp -R "$scop"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$dcop/
 done < "$WDIR"/text_files/"$VDSUSER"_subdomain_list;
@@ -170,8 +170,9 @@ ls /var/www/html/|grep -v '^manager.html$' |grep -v '^plugins$' |grep -v '^fm$' 
 
 ##ticking
 while :; do
-  printf " ."
+  echo "."
   sleep 2
+
 done &
 bgid=$!
 ##end ticking
@@ -206,7 +207,6 @@ else
   ls -A1 /var/lib/mysql/ |grep -Ev "^mysql$|\.err|\.sock" > $WDIR/text_files/"$VDSUSER"_databases
   for i in `cat "$WDIR"/text_files/"$VDSUSER"_databases`; do mysqldump $i > "$WDIR"/database_dumps/$i.sql;done
 fi
-echo
 
 kill "$bgid"; echo
 
