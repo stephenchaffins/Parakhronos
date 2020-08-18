@@ -165,12 +165,12 @@ grep -E 'ServerName|DocumentRoot' /etc/httpd/conf/httpd.conf | grep -vE ':80|/va
 mkdir -p /root/"$TODAY"_"$VDSUSER"/domain_files/$MDOM
 ls /var/www/html/|grep -v '^manager.html$' |grep -v '^plugins$' |grep -v '^fm$' |grep -v '^users$' |grep -v '^manager$' |grep -v '^vdsbackup$'  |grep -vf "$WDIR"/text_files/tmp_excludes > "$WDIR"/text_files/mdom_exlist
 
- #ticking
- while :; do
+#ticking
+while :; do
   for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done
 
 done &
- bgid=$!
+bgid=$!
 ##end ticking
 
 while read fline
