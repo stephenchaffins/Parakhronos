@@ -109,21 +109,19 @@ if [[ ! -f /usr/local/cpanel/cpanel ]] ; then
     eval cp -av /root/pkhro_pkg.sh ~"$i/root/migration_scripts/"
     echo -e "\e[33m\e[1m Chowning root directory to $i ownership... \e[0m";sleep 1; echo
     eval chown $i: -R ~"$i/root/migration_scripts/"
-    echo -e "\e[33m\e[1m Running pkhro_pkg.sh inside of $i VDS... \e[0m";sleep 1; echo
+    echo -e "\e[33m\e[1m Running pkhro_pkg.sh inside of $i VDS... \e[0m";sleep 1;
     su - $i -c 'cd /root/migration_scripts/; /bin/bash pkhro_pkg.sh'
         if [ "$shouldrsync" -eq "10" ]; then
         echo -e "\e[33m\e[1m Rsyncing $i to vmcp14... \e[0m";sleep 1;
 
-        while :; do
-          printf " ."
-          sleep 2
-        done &
-        bgid=$!
+        while true;do echo -ne "";sleep 2;done &
+         while :;do for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done;done
 
             eval scp -v -P 1022 -i "$fullkeythost" ~"$i/root/parakhronos_restore_$i.tar" root@"$fulldesthost":/root/
 
-        kill "$bgid";
-
+            kill $!; trap 'kill $!' SIGTERM
+            echo done
+            
             if [[ $? -eq 0 ]]; then
               echo
               echo -e "\e[33m\e[1m Rsyncing $i to vmcp14 was success! \e[0m";

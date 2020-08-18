@@ -51,16 +51,15 @@ cat /etc/mail/virtusertable |awk '{print $1}'|grep -vE '\#|MAILER-DAEMON|postmas
 echo -e "\e[33m\e[1m Copying mailbox data... \e[0m";
 
 ##ticking
-while :; do
-  printf " ."
-  sleep 2
-done &
-bgid=$!
+while true;do echo -ne "";sleep 2;done &
+ while :;do for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done;done
 ##end ticking
 
 cp -a /var/spool/mail "$WDIR"/mailboxes
 
-kill "$bgid"; echo
+kill $!; trap 'kill $!' SIGTERM
+echo done
+
 # -----------------------------------------------------------------------------
 # Get the main domain
 # -----------------------------------------------------------------------------
@@ -109,11 +108,8 @@ echo
 echo -e "\e[33m\e[1m Copying addon domain and subdomain file data now... \e[0m"
 
 ##ticking
-while :; do
-  printf " ."
-  sleep 2
-done &
-bgid=$!
+while true;do echo -ne "";sleep 2;done &
+ while :;do for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done;done
 ##end ticking
 
 TMPemptychk=`cat "$WDIR"/text_files/"$VDSUSER"_addon_subdomains`
@@ -131,18 +127,18 @@ do
   fi
 done < "$WDIR"/text_files/"$VDSUSER"_addon_subdomains;
 
-kill "$bgid";
+kill $!; trap 'kill $!' SIGTERM
+echo done
+
 # -----------------------------------------------------------------------------
 # Copying subdomains data
 # -----------------------------------------------------------------------------
 
 ##ticking
-while :; do
-  printf " ."
-  sleep 2
-done &
-bgid=$!
+while true;do echo -ne "";sleep 2;done &
+ while :;do for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done;done
 ##end ticking
+
 TMPemptychk2=$(cat "$WDIR"/text_files/"$VDSUSER"_subdomain_list)
 
 while read sdcopy
@@ -158,7 +154,8 @@ do
   #cp -R "$scop"/. /root/"$TODAY"_"$VDSUSER"/domain_files/$dcop/
 done < "$WDIR"/text_files/"$VDSUSER"_subdomain_list;
 
-kill "$bgid"; echo
+kill $!; trap 'kill $!' SIGTERM
+echo done
 
 # -----------------------------------------------------------------------------
 # Copying the main domain data. This is messy and ugly, but there's no rsync.
@@ -168,18 +165,9 @@ grep -E 'ServerName|DocumentRoot' /etc/httpd/conf/httpd.conf | grep -vE ':80|/va
 mkdir -p /root/"$TODAY"_"$VDSUSER"/domain_files/$MDOM
 ls /var/www/html/|grep -v '^manager.html$' |grep -v '^plugins$' |grep -v '^fm$' |grep -v '^users$' |grep -v '^manager$' |grep -v '^vdsbackup$'  |grep -vf "$WDIR"/text_files/tmp_excludes > "$WDIR"/text_files/mdom_exlist
 
-#11 #ticking
-#11 while :; do
-#11  printf " ."
-#11  sleep 2
+while true;do echo -ne "";sleep 2;done &
+ while :;do for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done;done
 
-#11done &
-#11 bgid=$!
-##end ticking
-
-while true;do echo -n .;sleep 2;done &
- while :;do for s in / - \\ \|; do printf "\r$s";sleep 1;done;done
- 
 while read fline
 do
   cp -R /var/www/html/$fline $WDIR/domain_files/$MDOM/
@@ -187,7 +175,6 @@ done < "$WDIR"/text_files/mdom_exlist
 
 kill $!; trap 'kill $!' SIGTERM
 echo done
-#11kill "$bgid"; echo
 
 # -----------------------------------------------------------------------------
 # Find all existing MySQL databases. MySQL must be running.
@@ -195,11 +182,8 @@ echo done
 echo -e "\e[33m\e[1m Getting list of MySQL databases and dumping them... \e[0m"
 
 ##ticking
-while :; do
-  printf " ."
-  sleep 2
-done &
-bgid=$!
+while true;do echo -ne "";sleep 2;done &
+ while :;do for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done;done
 ##end ticking
 
 if [ ! -f /usr/bin/mysql ];
@@ -210,21 +194,23 @@ else
   for i in `cat "$WDIR"/text_files/"$VDSUSER"_databases`; do mysqldump $i > "$WDIR"/database_dumps/$i.sql;done
 fi
 
-kill "$bgid"; echo
+kill $!; trap 'kill $!' SIGTERM
+echo done
 
 # -----------------------------------------------------------------------------
 # This tars and gzips all thats been gathered (data and text files, and dumps.)
 # -----------------------------------------------------------------------------
 echo -e "\e[33m\e[1m Archiving and compressing everything thats been done...\e[0m \e[1m\e[41m BE PATIENT! \e[0m "; sleep 1
-while :; do
-  printf " ."
-  sleep 2
-done &
-bgid=$!
+
+## ticking
+while true;do echo -ne "";sleep 2;done &
+ while :;do for s in / - \\ \|; do echo -ne "\r $s";sleep 1;done;done
+ ## ticking
 
 tar -C "$WDIR" -cf /root/parakhronos_restore_"$VDSUSER".tar . |grep -v "Removing leading"
 
-kill "$bgid";echo
+kill $!; trap 'kill $!' SIGTERM
+echo done
 
 echo -e "\e[33m\e[1m Archiving of all data now complete..."; echo
 
