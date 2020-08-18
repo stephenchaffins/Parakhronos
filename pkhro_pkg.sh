@@ -170,7 +170,7 @@ ls /var/www/html/|grep -v '^manager.html$' |grep -v '^plugins$' |grep -v '^fm$' 
 
 ##ticking
 while :; do
-  echo "."
+  echo -n "."
   sleep 2
 
 done &
