@@ -243,7 +243,7 @@ do
   done &
   bgid=$!
 
-  rsync -vaP "$WORKDIR"/domain_files/"$subactual"/ /home/"$cpUSER"/public_html/"$subactual"/
+  rsync -aP "$WORKDIR"/domain_files/"$subactual"/ /home/"$cpUSER"/public_html/"$subactual"/
   echo
   kill "$bgid"; echo
 
@@ -267,7 +267,7 @@ while :; do
 done &
 bgid=$!
 
-rsync -vaP "$WORKDIR"/domain_files/"$mainDOM"/ /home/"$cpUSER"/public_html/
+rsync -aP "$WORKDIR"/domain_files/"$mainDOM"/ /home/"$cpUSER"/public_html/
 chown -R "$cpUSER":"$cpUSER" /home/"$cpUSER"/public_html/*
 
 kill "$bgid";
