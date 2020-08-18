@@ -52,7 +52,7 @@ echo -e "\e[33m\e[1m Copying mailbox data... \e[0m";
 
 ##ticking
 while :; do
-  printf "."
+  printf " ."
   sleep 5
 done &
 bgid=$!
@@ -110,7 +110,7 @@ echo -e "\e[33m\e[1m Copying addon domain and subdomain file data now... \e[0m"
 
 ##ticking
 while :; do
-  printf "."
+  printf " ."
   sleep 5
 done &
 bgid=$!
@@ -138,7 +138,7 @@ kill "$bgid";
 
 ##ticking
 while :; do
-  printf "."
+  printf " ."
   sleep 5
 done &
 bgid=$!
@@ -170,7 +170,7 @@ ls /var/www/html/|grep -v '^manager.html$' |grep -v '^plugins$' |grep -v '^fm$' 
 
 ##ticking
 while :; do
-  printf "."
+  printf " ."
   sleep 5
 done &
 bgid=$!
@@ -193,7 +193,7 @@ echo -e "\e[33m\e[1m Getting list of MySQL databases and dumping them... \e[0m"
 
 ##ticking
 while :; do
-  printf "."
+  printf " ."
   sleep 5
 done &
 bgid=$!
@@ -215,7 +215,7 @@ kill "$bgid"; echo
 # -----------------------------------------------------------------------------
 echo -e "\e[33m\e[1m Archiving and compressing everything thats been done...\e[0m \e[1m\e[41m BE PATIENT! \e[0m "; sleep 1
 while :; do
-  printf "."
+  printf " ."
   sleep 5
 done &
 bgid=$!

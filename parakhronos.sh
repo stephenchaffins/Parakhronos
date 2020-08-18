@@ -73,7 +73,7 @@ if [[ ! -f /usr/local/cpanel/cpanel ]]; then
               echo -e "\e[33m\e[1m Unrecognizable Response, Please enter [Y]es or [N]o. \e[0m";echo;echo;
             fi
           done
-]elif [[ -f /usr/local/cpanel/cpanel ]]; then
+elif [[ -f /usr/local/cpanel/cpanel ]]; then
   wget -q --no-check-certificate --no-cache --no-cookie https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_restore.sh -O /root/pkhro_restore.sh
   chmod 755 /root/pkhro_restore.sh
 else
@@ -125,10 +125,10 @@ elif [[ -f /usr/local/cpanel/cpanel ]]; then
   for i in "${masteruserlist[@]}"
   do
     cpname=$(echo $i | cut -c -8)
-    echo $cpname "$rand0pass" >> /var/log/mig_user_pass
+    echo "$cpname" "$rand0pass" >> /var/log/mig_user_pass
     echo -e "\e[33m\e[1m Restoring account $i \e[0m";sleep 1; echo
     eval cd /root/
-    eval ./pkhro_restore.sh $i $cpname "$rand0pass"
+    eval ./pkhro_restore.sh $i "$cpname" "$rand0pass"
     sleep 5;
     echo;
   done
