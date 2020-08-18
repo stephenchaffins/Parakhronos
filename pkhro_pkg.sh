@@ -168,24 +168,25 @@ grep -E 'ServerName|DocumentRoot' /etc/httpd/conf/httpd.conf | grep -vE ':80|/va
 mkdir -p /root/"$TODAY"_"$VDSUSER"/domain_files/$MDOM
 ls /var/www/html/|grep -v '^manager.html$' |grep -v '^plugins$' |grep -v '^fm$' |grep -v '^users$' |grep -v '^manager$' |grep -v '^vdsbackup$'  |grep -vf "$WDIR"/text_files/tmp_excludes > "$WDIR"/text_files/mdom_exlist
 
-##ticking
-while :; do
-  echo -n "."
-  sleep 2
+#11 #ticking
+#11 while :; do
+#11  printf " ."
+#11  sleep 2
 
-done &
-bgid=$!
+#11done &
+#11 bgid=$!
 ##end ticking
+
+while true;do echo -n .;sleep 2;done &
 
 while read fline
 do
   cp -R /var/www/html/$fline $WDIR/domain_files/$MDOM/
 done < "$WDIR"/text_files/mdom_exlist
 
-#rm "$WDIR"/text_files/mdom_exlist
-#rm "$WDIR"/text_files/tmp_excludes
-
-kill "$bgid"; echo
+kill $!; trap 'kill $!' SIGTERM
+echo done
+#11kill "$bgid"; echo
 
 # -----------------------------------------------------------------------------
 # Find all existing MySQL databases. MySQL must be running.
