@@ -52,6 +52,7 @@ if [[ ! -f /usr/local/cpanel/cpanel ]]; then
   wget -q --no-check-certificate --no-cache --no-cookie https://raw.githubusercontent.com/stephenchaffins/Parakhronos/master/pkhro_pkg.sh -O /root/pkhro_pkg.sh
   chmod 755 /root/pkhro_pkg.sh
           while :; do
+            echo;echo;echo
             echo "Would you like this script to auto-copy the packaged account file to the destination server? [Y]es/[n]o"
             read shouldrsync
             echo
@@ -108,7 +109,17 @@ if [[ ! -f /usr/local/cpanel/cpanel ]] ; then
     su - $i -c 'cd /root/migration_scripts/; /bin/bash pkhro_pkg.sh'
         if [ "$shouldrsync" -eq "10" ]; then
         echo -e "\e[33m\e[1m Rsyncing $i to vmcp14... \e[0m";sleep 1; echo
-        eval scp -v -P 1022 -i "$fullkeythost" ~"$i/root/parakhronos_restore_$i.tar" root@"$fulldesthost":/root/
+
+        while :; do
+          printf " ."
+          sleep 2
+        done &
+        bgid=$!
+
+            eval scp -v -P 1022 -i "$fullkeythost" ~"$i/root/parakhronos_restore_$i.tar" root@"$fulldesthost":/root/
+
+        kill "$bgid";
+
             if [[ $? -eq 0 ]]; then
               echo -e "\e[33m\e[1m Rsyncing $i to vmcp14 was success! \e[0m";
             else
@@ -128,7 +139,7 @@ elif [[ -f /usr/local/cpanel/cpanel ]]; then
     echo "$cpname" "$rand0pass" >> /var/log/mig_user_pass
     echo -e "\e[33m\e[1m Restoring account $i \e[0m";sleep 1; echo
     eval cd /root/
-    eval ./pkhro_restore.sh $i "$cpname" "$rand0pass"
+    eval ./pkhro_restore.sh "$i" "$cpname" "$rand0pass"
     sleep 5;
     echo;
   done
