@@ -87,4 +87,4 @@ Give a ⭐️ if this project helped you!
 ## :pencil:	 License
 
 Copyright © 2020 [Stephen Chaffins](https://github.com/stephenchaffins).<br />
-This project is [GNU](https://github.com/stephenchaffins/Parakhronos/blob/master/LICENSE) licensed.
+This project is [MIT](https://github.com/stephenchaffins/Parakhronos/blob/master/LICENSE) licensed.
