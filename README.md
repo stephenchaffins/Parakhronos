@@ -6,7 +6,7 @@
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
   <a href="https://github.com/stephenchaffins/Parakhronos/graphs/commit-activity" target="_blank">
-    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-no-red.svg" />
   </a>
   <a href="https://github.com/stephenchaffins/Parakhronos/blob/master/LICENSE" target="_blank">
     <img alt="License: GNU" src="https://img.shields.io/github/license/stephenchaffins/Parakhronos" />
